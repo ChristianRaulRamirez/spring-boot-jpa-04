@@ -1,0 +1,68 @@
+<!DOCTYPE html >
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Libro</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">Biblioteca</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/autores/">Autores</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/libros/">Libros</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/categorias/">Categorias</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/editoriales/">Editoriales</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container mt-5">
+    <h2>Formulario de Libro</h2>
+    <!-- Formulario para Guardar/Actualizar un libro -->
+    <form action="/libros/guardar" method="post"> <!-- O actualizar ("/libros/{id}/actualizar") para editar -->
+        <input type="hidden" name="id" th:value="${libro.id}">
+
+        <!-- Campos para título, editorial, categoría y autores -->
+        <div class="form-group">
+            <label for="titulo">Título</label>
+            <input th:value="${libro.titulo}" type="text" class="form-control" id="titulo" name="titulo" placeholder="Título del libro" required>
+        </div>
+        <div class="form-group">
+            <label for="editorialId">Editorial</label>
+            <select class="form-control" id="editorialId" name="editorialId" required>
+                <!-- Options de las editoriales obtenidas del controlador -->
+                <!-- Ejemplo con Thymeleaf: th:each="editorial : ${editoriales}" -->
+                <option th:each="editorial : ${editoriales}" th:value="${editorial.id}" th:text="${editorial.nombre}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="categoriaId">Categoría</label>
+            <select class="form-control" id="categoriaId" name="categoriaId" required>
+                <!-- Options de las categorías obtenidas del controlador -->
+                <!-- Ejemplo con Thymeleaf: th:each="categoria : ${categorias}" -->
+                <option th:each="categoria : ${categorias}" th:value="${categoria.id}" th:text="${categoria.nombre}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="autoresIds">Autores</label>
+            <select multiple class="form-control" id="autoresIds" name="autoresIds" required>
+                <!-- Options de los autores obtenidos del controlador -->
+                <!-- Ejemplo con Thymeleaf: th:each="autor : ${autores}" -->
+                <option th:each="autor : ${autores}" th:value="${autor.id}" th:text="${autor.nombre}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+</div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

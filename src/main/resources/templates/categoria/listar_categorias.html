@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Categorías</title>
+    <!-- Agrega los enlaces a Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">Biblioteca</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/autores/">Autores</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/libros/">Libros</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/categorias/">Categorias</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/editoriales/">Editoriales</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h1>Listado de Categorías</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Acciones</th>
+            <!-- Otros encabezados de tabla si es necesario -->
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Aquí iteras sobre las categorías obtenidas del controlador -->
+        <!-- Ejemplo usando Thymeleaf: -->
+        <tr th:each="categoria : ${categorias}">
+            <td th:text="${categoria.id}"></td>
+            <td th:text="${categoria.nombre}"></td>
+            <!-- Otros datos de la categoría si es necesario -->
+            <td>
+                <!-- Botones para editar y eliminar -->
+                <a th:href="@{/categorias/{id}/editar(id=${categoria.id})}" class="btn btn-primary btn-sm">Editar</a>
+                <a th:href="@{/categorias/{id}/eliminar(id=${categoria.id})}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/categorias/nuevo" class="btn btn-success">Agregar categoria</a>
+</div>
+<!-- Agrega los enlaces a los scripts de Bootstrap -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
